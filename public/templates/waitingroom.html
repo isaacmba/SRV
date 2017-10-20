@@ -1,0 +1,42 @@
+<div class="column" flex>
+	 <div class="md-padding" layout= "row"> 
+	 	<div flex>
+			
+				<center>
+					<!-- <img src="../images/logo2.png" style="width:150px;height:150px;"> -->
+					<h1>LOGO
+						HERE</h1>
+					<h4>Welcome, Todd Chavez</h4>
+					<h2>Title of Session Here</h2>
+					<small><b><h3>SESSION WILL BEGIN IN</h3></b></small>
+					<h1 style="color:#0275d8;">04:00</h1>
+				</center>
+
+
+		</div>
+	</div>
+	<div class="md-padding" layout="row" style="padding-left: 20%; padding-right: 20%; ">
+		<md-content>
+			<div flex>
+				<h3 >UPCOMING</h3>
+			
+			 <div layout="row" flex>
+      			<div class="parent" layout="column" ng-repeat="u in upcoming track b $index" flex="25" flex-gt-sm="50"  >
+				<md-card >
+		          <md-card-content >
+		            <small>{{u.data.date}}</small>
+		            <p>{{u.data.title}}</p>
+		          </md-card-content>
+		          <div class="md-actions" layout="row" layout-align="start center">
+		            <md-button md-ink-ripple>
+		            <i  class="fa fa-heartbeat" aria-hidden="true"></i>
+		          </md-button>  
+		          <md-button md-ink-ripple>
+		          	<i ng-click="addSession(u.id)" class="material-icons">today</i>
+		          </md-button>           
+		        </md-card>
+			</div>
+			</div>
+		</md-content>
+	</div>
+</div>

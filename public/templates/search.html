@@ -1,0 +1,19 @@
+ 
+        <div layout="column" layout-fill>
+              <md-toolbar class="searchbar">
+
+                <div class="md-toolbar-tools">
+                     <md-button md-ink-ripples>
+                        <i style="color:black" class="material-icons">search</i>
+                  </md-button>
+                  <md-input-container class="md-block" md-truncate flex>
+                          <label>Search Sessions</label>
+                          <input ng-model="search.who">
+                    </md-input-container>
+                </div>
+            </md-toolbar>   
+                <md-content>
+
+           <div ui-view></div>
+            </md-content>
+            </div> 

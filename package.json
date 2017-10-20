@@ -1,0 +1,27 @@
+{
+  "name": "srv",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "yitz benami",
+  "license": "ISC",
+  "dependencies": {
+    "angular-js-xlsx": "0.0.3",
+    "angular-jwt": "^0.1.9",
+    "angular-pageslide-directive": "^2.1.4",
+    "angular-socialshare": "^2.3.11",
+    "angularjs-social-login": "^2.6.1",
+    "body-parser": "^1.18.1",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "express-session": "^1.15.5",
+    "passport": "^0.4.0",
+    "passport-linkedin": "^1.0.0",
+    "xlsx-to-json": "^0.3.0"
+  }
+}

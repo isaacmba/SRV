@@ -1,0 +1,41 @@
+ <style type="text/css">
+     md-toolbar h1 {
+  font-size: 1.250em;
+  font-weight: 400;
+  margin: auto;
+}
+md-item p {
+  margin-top: 0;
+}
+ </style>
+
+ <md-toolbar layout="row"">
+      <h1>Hello</h1>
+    </md-toolbar>
+    <div layout="row" flex>
+        <div layout="column" flex id="content">
+            <md-content layout="column" flex class="md-padding">
+              <md-button class="md-primary" ng-click="showDialog($event)">Login</md-button>
+              <!-- TODO :-->
+              <!-- <md-button class="md-primary" ng-click="adminSignin($event)">Admin</md-button> -->
+            </md-content>
+        </div>
+    </div>
+
+     <script type="text/ng-template" id="dialog1.tmpl.html">
+                    <md-dialog ng-cloak flex="50" >
+                    <form>
+                    
+                      <md-dialog-actions  layout="column" >
+                    
+                        <md-button linked-in ng-click="login($event)" style="height: 100px; line-height: 100px;">
+                        <!--  <ng-md-icon  icon="linkedin" style="fill: #0275d8"> --></ng-md-icon> 
+                        Login w/LinkedIn</md-button>
+                      </md-dialog-actions>
+                      <md-dialog-actions layout="column" >
+              
+                        <md-button ng-click="cancel()" style="height: 100px; line-height: 100px;">Cancel</md-button>
+                      </md-dialog-actions>
+                    </form>
+                  </md-dialog>
+                  </script>

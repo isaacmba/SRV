@@ -1,0 +1,196 @@
+<div layout="vertical">
+ <md-sidenav  layout="row" layout-fill style="height: 900px;" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" >
+            <md-list  flex>
+              <md-item ng-repeat="item in menu" md-ink-ripple>
+                <a ui-sref="{{item.ui}}">
+                  <md-item-content  layout="row" layout-align="start center" class="sidenav-link">
+                    <div class="inset">
+                      <md-button class="md-no-focus">
+                        <i class="material-icons">{{item.icon}}</i>
+                      </md-button>
+                    </div>
+
+                  </md-item-content>
+                </a>
+              </md-item>
+
+         <!--       <md-item ng-click="loginPopup($event)" md-ink-ripple >
+                <a>
+                    <md-item-content layout="row" layout-align="start center" class="sidenav-link">
+                    <div class="inset">
+                      <md-button class="md-no-focus">
+                        <ng-md-icon  icon="linkedin" style="fill: #0275d8"></ng-md-icon>
+                      </md-button>
+                    </div>
+                   
+                  </md-item-content>
+                </a>
+              </md-item>  -->
+               <md-item ng-click="admin($event)" md-ink-ripple >
+                <a>
+                    <md-item-content layout="row" layout-align="start center" class="sidenav-link">
+                    <div class="inset">
+                      <md-button class="md-no-focus" ng-click="admin()">
+                        <i class="material-icons" style="fill: #0275d8">lock</i>
+                      </md-button>
+                    </div>
+                   
+                  </md-item-content>
+                </a>
+             
+              </md-item> 
+            </md-list>
+
+        </md-sidenav>
+    
+
+        
+
+        <div layout="column" flex layout-fill>
+              <md-toolbar class="searchbar">
+
+                <div class="md-toolbar-tools">
+                     <md-button md-ink-ripple>
+                        <i style="color:black" class="material-icons">search</i>
+                  </md-button>
+                  <md-input-container class="md-block" md-truncate flex="90">
+                          <label>Search Sessions</label>
+                          <input ng-model="search.who">
+                    </md-input-container>
+                    <md-button ui-sref="profile({uid:user.uid})" md-ink-ripple flex>
+                      <i style="color:black" class="material-icons">account_circle</i>
+                      
+                    </md-button>
+                </div>
+            </md-toolbar>   
+                <md-content>
+
+            <!-- <div ui-view="upcomingsessions"></div> -->
+
+<div class="column" flex="40">
+ <div class="md-padding" layout= "row" flex="40" flex-offest="15"> 
+<h1 style="padding-left: 30px; ">Upcoming Sessions</h1>
+</div>
+  <div style="padding-left: 20px;padding-right: 30px;" class=' md-padding' layout="row" flex>
+    <div layout="row" flex>
+
+      <div  class="parent" layout="column" ng-repeat="s in sessions track by $index" flex >
+        <style type="text/css">
+          .session{
+            background-color: white;
+            cursor: pointer;
+            cursor: hand;
+          }
+          .session:hover{
+            background-color: yellow;
+            cursor: pointer;
+            cursor: hand;
+          }
+        </style>
+       <md-list-item >
+        <md-card class="session"  ui-sref="waitingroom({id: s.id})">
+          <md-card-content >
+            <small>{{s.data.date}}</small>
+            <p>{{s.data.title}}</p>
+          </md-card-content>
+          <div class="md-actions" layout="row" layout-align="start center">
+            <md-button md-ink-ripple >
+            <i  class="fa fa-heartbeat" aria-hidden="true"></i>
+          </md-button>  
+          <md-button>
+             <small >STARTS in {{s.data.timeToStart}}</small>
+          </md-button>           
+        </md-card>
+      </md-list-item>
+      </div>
+
+    </div>
+  </div>
+</div>
+  <style type="text/css">
+    .portfolio {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+
+    #input {
+      background-color: white;
+      max-width: 20%;
+    }
+  </style>
+  <div class="md-padding portfolio" layout="column" flex  >
+ 
+<br>
+        <div id="input" class="md-padding" flex="30">
+
+          <md-input-container class="md-icon-float md-block" flex="20">
+      <!-- Use floating label instead of placeholder -->
+      <label>Add Cunchbase data</label>
+      
+      <input ng-model="name" type="text">
+      <md-button flex  md-ink-ripple ng-click="addCrunchbase(name)">
+                <i class="material-icons">add_circle</i>
+              </md-button> 
+    </md-input-container>
+
+      </div>
+      
+
+     <div class="md-padding"> 
+        <h1 >Portfolio</h1>
+   </div>
+      
+      <!-- DATA -->
+
+    </md-toolbar>
+
+        <md-content laout="column" flex>
+
+          <md-card flex="33">
+
+            <md-toolbar class="md-table-toolbar md-default" ng-hide="options.rowSelection && selected.length">
+          <div class="md-toolbar-tools">
+            <span>Portfolio</span>
+            <div flex></div>
+            <md-button class="md-icon-button">
+               <i  class="fa fa-heartbeat" aria-hidden="true"></i>
+            </md-button>
+          </div>
+        </md-toolbar>
+          
+           <md-table-container>
+
+              <table md-table>
+                <thead>
+                <tr md-row>
+                  <th md-column><span>Company Name</span></th>
+                  <th md-column md-numeric><span>$ Raised</span></th>
+                  <th md-column md-numeric><span># Employees</span></th>
+                </tr>
+              </thead>  
+              <tbody>
+                <tr ng-repeat i in investments md-row>
+                  <td md-cell>{{i.name}}</td>
+                  <td md-cell>{{i.raised}}</td>
+                  <td md-cell>{{i.minE}} - {{i.maxE}}</td>
+                </tr>
+              </tbody>
+              </table>
+
+           </md-table-container>
+
+          </md-card>
+
+        </md-content>
+
+  </div>
+      </div>
+        
+
+
+
+
+
+
+           
+            </md-content>
