@@ -18,6 +18,28 @@ app.config(
 				
 			})
 			.state('dash', { 
+				// views: {
+				// 	'sessions': {
+				// 		templateUrl: 'dash-sessions.html',
+				// 		controller: 'SessionController'
+				// 	},
+				// 	'searchbar' : {
+				// 		templateUrl: 'dash-search.html',
+				// 		controller: 'SearchController'
+				// 	},
+				// 	'portfolio': {
+				// 		templateUrl: 'dash-portfolio.html',
+				// 		controller: 'PortController',
+				// 	},
+				// 	'waitingroom': {
+				// 		templateUrl: 'dash-waitingroom.html',
+				// 		controller: 'WRController'
+				// 	},
+				// 	'profile': {
+				// 		templateUrl: 'dash-profile.html',
+				// 		controller:'ProfileController'
+				// 	}
+				// },
 				url: '/dash',
 				controller: 'DashC',
 				templateUrl: 'templates/Dashboard.html',
@@ -25,24 +47,7 @@ app.config(
 					user: null
 				}
 			})
-			.state('profile',{
-				url:'/profile/:uid',
-				controller:'ProfileC',
-				templateUrl:'templates/profile.html',
-				params: {
-					user: null
-				}
-			})
-			.state('waitingroom',{
-				url: '/waitingroom/:id',
-				// controller: function($stateParams,$scope,dash){
-				// 	console.log($stateParams.id);
-				// 	// var id = $stateParams.id;
-				// 	// $scope.session = dash.sessions.id.data;
-				// },
-				controller: 'waitingroomCtrl',
-				templateUrl: 'templates/waitingroom.html'
-			})
+				
 			.state('admin',{
 				url:'/admin',
 				controller:'AdminC',
@@ -72,16 +77,27 @@ app.config(
 			$scope.portfolio = dash.portfolio;
 			console.log($scope.user.uid);
 		}
-		$scope.investments = crunch.getPerson('ashton','kutcher');
-		console.log($scope.investments);
+		crunch.getInfo('ashton','kutcher')
+			.success(function(data, status, headers, config){
+				console.log(status);
+				console.log(data.data);
+				
+			})
+			.error(function(data, status, headers, config){
+				console.log(status);
+				if(status == 404){
+					$state.go('login')
+				}
+
+			})
 
 		$scope.addCrunchbase = function(name){
 			name = name.toLowerCase();
 			var first = name.split(' ').slice(0, -1).join(' ');
 			var last = name.split(' ').slice(-1).join(' ');
-			var person = crunch.getPerson(first,last);
-			console.log(person);
-			$scope.investments = person;
+			var cbinfo = crunch.getInfo(first,last);
+			// var details = crunch.getDetails(first,last);
+			
 			
 		}
 
@@ -110,21 +126,22 @@ app.config(
 	// 'hi' yitz
 	// 3 login state controls: login, logout, go to dashboard state. login page js invokes action from the function factory. the function factory takes care of 
 	// whatever its asked. 
-	app.controller('LoginC', ['$scope', '$mdDialog', '$state', function($scope, $mdDialog, $state){
+	app.controller('LoginC', ['$scope', '$mdDialog', '$state', 'crunch', function($scope, $mdDialog, $state, crunch){
 	    var alert;
 	    $scope.showDialog = showDialog;
-	    $scope.items = [1,2,3];
+	    var linkedinInfo;
 
-	     function showDialog() {
+	    
+
+	    function showDialog() {
 	       var parentEl = angular.element(document.body);
 	       $mdDialog.show({
 	         parent: parentEl,
-	         // targetEvent: $event,
 	         template:
 	             '<md-dialog ng-cloak flex="50" >' +
                     '<form>' +
                     
-		'                      <md-dialog-actions  layout="column" >' +                    
+						'<md-dialog-actions  layout="column" >' +                    
                         '<md-button linked-in ng-click="login($event)" style="height: 100px; line-height: 100px;">' + 
                         '<!--  <ng-md-icon  icon="linkedin" style="fill: #0275d8"> --></ng-md-icon> ' + 
                         'Login w/LinkedIn</md-button>' +
@@ -135,9 +152,6 @@ app.config(
                       '</md-dialog-actions>' +
                     '</form>' +
                   '</md-dialog>',
-	         locals: {
-	           items: $scope.items
-	         },
 	         controller: DialogController
 	      });
 	      function DialogController(dash,$scope, $mdDialog, socialLoginService, $state) {
@@ -147,14 +161,43 @@ app.config(
 	        }
 	        //retrieve user linkedin
 			$scope.$on('event:social-sign-in-success', (event, userDetails)=> {
-				$scope.result = userDetails;
+
 				$mdDialog.hide();
 				console.log(userDetails);
-				dash.user = userDetails;
-				$state.go('dash', {user: userDetails});
-
+				linkedinInfo = userDetails;
+				
+				
+				userDetails.name = userDetails.name.toLowerCase();
+				var first = userDetails.name.split(' ').slice(0, -1).join(' ');
+				var last = userDetails.name.split(' ').slice(-1).join(' ');
+				console.log(first + "     " + last);
+				linkedinInfo.first = first;
+				linkedinInfo.last = last;
+				console.log(linkedinInfo);
+				checkCB(first,last);
 			})
 	      }
+	    }
+	  //   function splitName(name){
+	  //   	name = name.toLowerCase();
+	  //   	var f = name.split(' ').slice(0, -1).join(' ');
+			// var l = name.split(' ').slice(-1).join(' ');
+			// // return {f:f,l:l};
+	  //   }
+
+	    function checkCB(first,last){
+	    	crunch.getInfo(first,last)
+				.success(function(data, status, headers, config){
+					console.log(status);
+					console.log(data.data);
+			
+				})
+				.error(function(data, status, headers, config){
+					console.log(status);
+					$scope.error = true;
+					$scope.errormessage = "Your name doesnt see to be asscociated with a Crunchbase profile. If you use a different name for crunchbase enter it below.";
+					
+				})
 	    }
 
 	    $scope.closeDialog = function() {

@@ -13,11 +13,29 @@ md-item p {
       <h1>Hello</h1>
     </md-toolbar>
     <div layout="row" flex>
-        <div layout="column" flex id="content">
+        <div layout="column" flex id="content" ng-init="error=false">
             <md-content layout="column" flex class="md-padding">
               <md-button class="md-primary" ng-click="showDialog($event)">Login</md-button>
               <!-- TODO :-->
               <!-- <md-button class="md-primary" ng-click="adminSignin($event)">Admin</md-button> -->
+              <br>
+              <hr>
+
+              <div ng-if="error" >
+                <div class="alert alert-danger">
+                   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Error</strong> {{errormessage}}
+                    <!-- <div style="width: 30%;" class="input-group"> -->
+                      <input style="width: 30%;" ng-model="name" type="text" class="form-control" placeholder="Crunchbase Name" aria-describedby="basic-addon2" flex="10">
+                      <!-- <span>  -->
+                        <md-button ng-click="checkCB(name)">
+                        Check
+                      </md-button>
+                      <!-- </span> -->
+                    <!-- </div> -->
+                </div>
+                
+              </div>
             </md-content>
         </div>
     </div>

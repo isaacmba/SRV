@@ -1,24 +1,44 @@
-  <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-    <md-toolbar class="md-toolbar-tools md-hue-2">
-      <!-- <span flex></span> -->
-      <div layout="column" class="md-toolbar-tools-bottom inset">
-   <!--      <user-avatar></user-avatar>
-        <span></span> -->
-        <div>SRV</div>
-      </div>
-    </md-toolbar>
-    <md-list>
-      <md-item ng-repeat="item in menu">
-        <a href="#{{item.link}}">
-          <md-item-content md-ink-ripple layout="row" layout-align="start center">
-            <div class="inset">
-              <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
-            </div>
-            <div class="inset">{{item.title}}
-            </div>
-          </md-item-content>
-        </a>
-      </md-item>
-      <md-divider></md-divider>
-    </md-list>
-  </md-sidenav>
+<div layout="vertical">
+ <md-sidenav  layout="row" layout-fill style="height: 900px;" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" >
+            <md-list  flex>
+              <md-item ng-repeat="item in menu" md-ink-ripple>
+                <a ui-sref="{{item.ui}}">
+                  <md-item-content  layout="row" layout-align="start center" class="sidenav-link">
+                    <div class="inset">
+                      <md-button class="md-no-focus">
+                        <i class="material-icons">{{item.icon}}</i>
+                      </md-button>
+                    </div>
+
+                  </md-item-content>
+                </a>
+              </md-item>
+
+         <!--       <md-item ng-click="loginPopup($event)" md-ink-ripple >
+                <a>
+                    <md-item-content layout="row" layout-align="start center" class="sidenav-link">
+                    <div class="inset">
+                      <md-button class="md-no-focus">
+                        <ng-md-icon  icon="linkedin" style="fill: #0275d8"></ng-md-icon>
+                      </md-button>
+                    </div>
+                   
+                  </md-item-content>
+                </a>
+              </md-item>  -->
+               <md-item ng-click="admin($event)" md-ink-ripple >
+                <a>
+                    <md-item-content layout="row" layout-align="start center" class="sidenav-link">
+                    <div class="inset">
+                      <md-button class="md-no-focus" ng-click="admin()">
+                        <i class="material-icons" style="fill: #0275d8">lock</i>
+                      </md-button>
+                    </div>
+                   
+                  </md-item-content>
+                </a>
+             
+              </md-item> 
+            </md-list>
+
+        </md-sidenav>
