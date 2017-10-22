@@ -23,16 +23,16 @@ md-item p {
 
               <div ng-if="error" >
                 <div class="alert alert-danger">
-                   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                   <a href="#" class="close" data-dismiss="alert" ng-click="error=false" aria-label="close">&times;</a>
                     <strong>Error</strong> {{errormessage}}
-                    <!-- <div style="width: 30%;" class="input-group"> -->
-                      <input style="width: 30%;" ng-model="name" type="text" class="form-control" placeholder="Crunchbase Name" aria-describedby="basic-addon2" flex="10">
-                      <!-- <span>  -->
+
+                      <input style="width: 30%;" ng-model="first" type="text" class="form-control" placeholder="First Name" aria-describedby="basic-addon2" flex="10">  
+                      <input style="width: 30%;" ng-model="last" type="text" class="form-control" placeholder="Last Name" aria-describedby="basic-addon2" flex="10">
+        
                         <md-button ng-click="checkCB(name)">
                         Check
                       </md-button>
-                      <!-- </span> -->
-                    <!-- </div> -->
+                     
                 </div>
                 
               </div>

@@ -47,7 +47,33 @@ app.config(
 					user: null
 				}
 			})
-				
+			
+			.state('dash.sessions',{
+				url:'/dash',
+				controller:'SessionController',
+				templateUrl: 'templates/session.html'
+			})
+			.state('dash.portfolio',{
+				url:'/dash',
+				controller:'PortController',
+				templateUrl: 'templates/portfolio.html'
+			})	
+			.state('dash.profile',{
+				url:'/dash',
+				controller:'ProfileController',
+				templateUrl: 'templates/profile.html'
+			})
+			.state('dash.search',{
+				url:'/dash',
+				controller:'SearchController',
+				templateUrl: 'templates/search.html'
+			})			
+			.state('dash.waitingroom',{
+				url:'/dash/waitingroom',
+				controller:'waitingroom',
+				templateUrl: 'templates/waitingroom.html'
+			})
+
 			.state('admin',{
 				url:'/admin',
 				controller:'AdminC',
@@ -65,10 +91,10 @@ app.config(
 	app.controller('DashC',function($scope,dash, $stateParams,$state,$http,crunch){
 		// console.log($stateParams.user);
 		// console.log(dash.user);
-		if(Object.keys(dash.user).length == 0 && $stateParams.user == null){
-			$state.go('login');
-		}
-		else{
+		// if(Object.keys(dash.user).length == 0 && $stateParams.user == null){
+		// 	$state.go('login');
+		// }
+		// else{
 			// dash.user = $stateParams.user;
 			// console.log(dash.user);
 			// $state.go('profile', user)
@@ -76,11 +102,11 @@ app.config(
 			$scope.user = dash.user;
 			$scope.portfolio = dash.portfolio;
 			console.log($scope.user.uid);
-		}
+		// }
 		crunch.getInfo('ashton','kutcher')
 			.success(function(data, status, headers, config){
 				console.log(status);
-				console.log(data.data);
+				console.log(data.data.relationships.investments.items);
 				
 			})
 			.error(function(data, status, headers, config){
@@ -96,10 +122,36 @@ app.config(
 			var first = name.split(' ').slice(0, -1).join(' ');
 			var last = name.split(' ').slice(-1).join(' ');
 			var cbinfo = crunch.getInfo(first,last);
-			// var details = crunch.getDetails(first,last);
-			
-			
+			// var details = crunch.getDetails(first,last);	
 		}
+
+
+	    $scope.menu = [
+	        {
+	            link: '/dash',
+	            title: 'Sessions/Protfolio',
+	            icon: 'home',
+	            ui: 'dash'
+	        },
+	        {
+	            link: '/contacts',
+	            title: 'Connections',
+	            icon: 'group',
+	            ui: 'contacts'
+	        },
+	        {
+	          link : '/messages',
+	          title: 'Messages',
+	          icon: 'message',
+	          ui: 'messages'
+	        },
+	        {
+	            link: '/lamp',
+	            title: 'Stuff',
+	            icon: 'lightbulb_outline',
+	            ui: 'stuff'
+	        }
+	    ]
 
 		$scope.admin =  function(){
 			$state.go('admin');
@@ -174,7 +226,8 @@ app.config(
 				linkedinInfo.first = first;
 				linkedinInfo.last = last;
 				console.log(linkedinInfo);
-				checkCB(first,last);
+				// checkCB(first,last);
+				$state.go('dash');
 			})
 	      }
 	    }
@@ -186,6 +239,7 @@ app.config(
 	  //   }
 
 	    function checkCB(first,last){
+	    	console.log('clicked');
 	    	crunch.getInfo(first,last)
 				.success(function(data, status, headers, config){
 					console.log(status);
@@ -217,58 +271,7 @@ app.config(
 		}
 	}])
 
-	app.controller('dashCtrl', function($scope, $mdBottomSheet, $mdSidenav, $mdDialog,$mdMedia){
 
-	    $scope.loginPopup = function(ev){
-	      // console.log($mdDialog.confirm); 
-		  	 var confirm = $mdDialog.confirm({
-				controller: DialogController,
-				templateUrl: 'dialog1.tmpl.html',
-				parent: angular.element(document.body),
-				targetEvent: ev,
-				clickOutsideToClose: false,
-			})
-
-			$mdDialog.show(confirm);
-		  };
-
-
-
-		  $scope.admin = function(ev){
-		  	
-		  };
-
-		  
-	        
-    
-
-    $scope.menu = [
-        {
-            link: '/dash',
-            title: 'Sessions/Protfolio',
-            icon: 'home',
-            ui: 'dash'
-        },
-        {
-            link: '/contacts',
-            title: 'Connections',
-            icon: 'group',
-            ui: 'contacts'
-        },
-        {
-          link : '/messages',
-          title: 'Messages',
-          icon: 'message',
-          ui: 'messages'
-        },
-        {
-            link: '/lamp',
-            title: 'Stuff',
-            icon: 'lightbulb_outline',
-            ui: 'stuff'
-        }
-    ]
-});
 
 // function DialogController($scope, $mdDialog,socialLoginService) {
 

@@ -1,5 +1,6 @@
-<div layout="vertical">
- <md-sidenav  layout="row" layout-fill style="height: 900px;" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" >
+
+<div layout="row">
+  <md-sidenav   layout-fill style="height: 800px;" class="md-sidenav-left md-whiteframe-z2"   md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" >
             <md-list  flex>
               <md-item ng-repeat="item in menu" md-ink-ripple>
                 <a ui-sref="{{item.ui}}">
@@ -27,41 +28,24 @@
              
               </md-item> 
             </md-list>
+  </md-sidenav>
+    </div>
+  <div layout="column" ui-view="dash.search" flex>
 
-        </md-sidenav>
-    
-
-        
-
-        <div layout="column" flex layout-fill>
-              <md-toolbar class="searchbar">
-
-                <div class="md-toolbar-tools">
-                     <md-button md-ink-ripple>
-                        <i style="color:black" class="material-icons">search</i>
-                  </md-button>
-                  <md-input-container class="md-block" md-truncate flex="90">
-                          <label>Search Sessions</label>
-                          <input ng-model="search.who">
-                    </md-input-container>
-                    <md-button ui-sref="profile({uid:user.uid})" md-ink-ripple flex>
-                      <i style="color:black" class="material-icons">account_circle</i>
-                      
-                    </md-button>
-                </div>
-            </md-toolbar>   
-                <md-content>
+              </div>
+                <!-- <md-content>
 
             <!-- <div ui-view="upcomingsessions"></div> -->
 
-<div class="column" flex="40">
- <div class="md-padding" layout= "row" flex="40" flex-offest="15"> 
-<h1 style="padding-left: 30px; ">Upcoming Sessions</h1>
-</div>
-  <div style="padding-left: 20px;padding-right: 30px;" class=' md-padding' layout="row" flex>
-    <div layout="row" flex>
+<div  layout="column">
+    <div class="md-padding" layout= "row" flex="40" flex-offest="15"> 
+        <h1 style="padding-left: 30px; ">Upcoming Sessions</h1>
+    </div>
 
-      <div  class="parent" layout="column" ng-repeat="s in sessions track by $index" flex >
+    <div style="padding-left: 20px;padding-right: 30px;" class=' md-padding' layout="row" flex>
+    
+
+        <div  class="parent" layout="column" ng-repeat="s in sessions" flex >
         <style type="text/css">
           .session{
             background-color: white;
@@ -76,7 +60,7 @@
         </style>
        <md-list-item >
         <md-card class="session"  ui-sref="waitingroom({id: s.id})">
-          <md-card-content >
+          <md-card-content>
             <small>{{s.data.date}}</small>
             <p>{{s.data.title}}</p>
           </md-card-content>
@@ -92,8 +76,7 @@
       </div>
 
     </div>
-  </div>
-</div>
+
   <style type="text/css">
     .portfolio {
       padding-left: 30px;
@@ -105,7 +88,7 @@
       max-width: 20%;
     }
   </style>
-  <div class="md-padding portfolio" layout="column" flex  >
+  <div class="md-padding portfolio" layout="column" flex>
  
 <br>
         <div id="input" class="md-padding" flex="30">
@@ -144,7 +127,7 @@
             </md-button>
           </div>
         </md-toolbar>
-          
+         <!--  
            <md-table-container>
 
               <table md-table>
@@ -156,7 +139,7 @@
                 </tr>
               </thead>  
               <tbody>
-                <tr ng-repeat i in investments md-row>
+                <tr ng-repeat="i in investments" md-row>
                   <td md-cell>{{i.name}}</td>
                   <td md-cell>{{i.raised}}</td>
                   <td md-cell>{{i.minE}} - {{i.maxE}}</td>
@@ -164,7 +147,7 @@
               </tbody>
               </table>
 
-           </md-table-container>
+           </md-table-container> -->
 
           </md-card>
 
