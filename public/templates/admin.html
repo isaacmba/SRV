@@ -1,3 +1,33 @@
+ <md-sidenav  layout="row" layout-fill style="height: 900px;" class="md-sidenav-left md-whiteframe-z2"   md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" >
+            <md-list  flex>
+              <md-item ng-repeat="item in menu" md-ink-ripple>
+                <a ui-sref="{{item.ui}}">
+                  <md-item-content  layout="row" layout-align="start center" class="sidenav-link">
+                    <div class="inset">
+                      <md-button class="md-no-focus">
+                        <i class="material-icons">{{item.icon}}</i>
+                      </md-button>
+                    </div>
+
+                  </md-item-content>
+                </a>
+              </md-item>
+               <md-item ng-click="admin($event)" md-ink-ripple >
+                <a>
+                    <md-item-content layout="row" layout-align="start center" class="sidenav-link">
+                    <div class="inset">
+                      <md-button class="md-no-focus" ng-click="admin()">
+                        <i class="material-icons" style="fill: #0275d8">lock</i>
+                      </md-button>
+                    </div>
+                   
+                  </md-item-content>
+                </a>
+             
+              </md-item> 
+            </md-list>
+  </md-sidenav>
+
  <md-content ng-controller="AdminC" ng-cloak="">
 	 <div class="container col-md-4 col-md-offset-2">
 	 	<form novalidate>

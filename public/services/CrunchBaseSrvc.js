@@ -41,23 +41,7 @@ app.factory('crunch',function($http){
 			// })
 		},
 
-		// getDetails: function(first,last){
-		// 	return $http.get('https://api.crunchbase.com/v3.1/people/'+first+'-'+last+'?user_key=2a3d08f3d5d44364196be2c6255e8187')
-		// 				.then(function(res){
-		// 					// console.log(res.data.data);
-		// 					var D = res.data.data;
-		// 					// console.log(D);
-
-		// 					D.bio = D.properties.bio;
-		// 					D.birthday = D.properties.born_on;
-		// 					D.gender = D.properties.gender;
-		// 					D.img = D.properties.profile_image_url;
-		// 					D.uuid = D.uuid;
-		// 					console.log(D);
-		// 					return D;
-
-		// 				})
-		// }
+		// compareTwo
 	}
 
 });

@@ -73,6 +73,7 @@ app.config(
 				controller:'waitingroom',
 				templateUrl: 'templates/waitingroom.html'
 			})
+			// .state('dash.compare')
 
 			.state('admin',{
 				url:'/admin',
@@ -106,7 +107,7 @@ app.config(
 		crunch.getInfo('ashton','kutcher')
 			.success(function(data, status, headers, config){
 				console.log(status);
-				console.log(data.data.relationships.investments.items);
+				console.log(data.data);
 				
 			})
 			.error(function(data, status, headers, config){
@@ -115,7 +116,7 @@ app.config(
 					$state.go('login')
 				}
 
-			})
+		})
 
 		$scope.addCrunchbase = function(name){
 			name = name.toLowerCase();
